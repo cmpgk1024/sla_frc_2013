@@ -32,10 +32,8 @@ public class RobotTemplate extends SimpleRobot {
         //4-Wheel tank drive
         //Motors must be set in the following order:
         //LeftFront=1; LeftRear=2; RightFront=3; RightRear=4;
-        /*
         drivetrain = new RobotDrive(1,2,3,4);
-        drivetrain.tankDrive(leftStick, rightStick);
-        */
+        //drivetrain.tankDrive(leftStick, rightStick);
     }
 
 
