@@ -27,7 +27,7 @@ public class RobotTemplate extends SimpleRobot {
         gearMotor = new Victor(5); //initialize speed controller
         
         //2-Wheel tank drive
-        drivetrain = new RobotDrive(1,2);
+        //drivetrain = new RobotDrive(1,2);
         
         //4-Wheel tank drive
         //Motors must be set in the following order:
