@@ -24,7 +24,7 @@ public class RobotTemplate extends SimpleRobot {
         leftStick = new Joystick(1);
         rightStick  = new Joystick(2);
         
-        gearMotor = new Victor(3); //initialize speed controller
+        gearMotor = new Victor(5); //initialize speed controller
         
         //2-Wheel tank drive
         drivetrain = new RobotDrive(1,2);
