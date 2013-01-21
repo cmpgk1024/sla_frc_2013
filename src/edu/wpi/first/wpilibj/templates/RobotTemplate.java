@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.DriverStationLCD;
 
 
 public class RobotTemplate extends SimpleRobot {
@@ -14,7 +15,8 @@ public class RobotTemplate extends SimpleRobot {
     public RobotDrive drivetrain;
     public Joystick leftStick;
     public Joystick rightStick;
-    public Victor gearMotor;
+    public DriverStationLCD lcd;
+    //public Victor gearMotor;
     
 
 
@@ -24,15 +26,15 @@ public class RobotTemplate extends SimpleRobot {
         leftStick = new Joystick(1);
         rightStick  = new Joystick(2);
         
-        gearMotor = new Victor(5); //initialize speed controller
+        //gearMotor = new Victor(5); //initialize speed controller
         
         //2-Wheel tank drive
-        //drivetrain = new RobotDrive(1,2);
+        drivetrain = new RobotDrive(1,2);
         
         //4-Wheel tank drive
         //Motors must be set in the following order:
         //LeftFront=1; LeftRear=2; RightFront=3; RightRear=4;
-        drivetrain = new RobotDrive(1,2,3,4);
+        //drivetrain = new RobotDrive(1,2,3,4);
         //drivetrain.tankDrive(leftStick, rightStick);
     }
 
@@ -52,11 +54,25 @@ public class RobotTemplate extends SimpleRobot {
          while(isOperatorControl() && isEnabled() ){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
+             if(leftStick.getTrigger()){
+                 lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
+                 Jaguar motor;
+                 motor = new Jaguar(1);
+                 if(motor.get() > -1){
+                 motor.set(motor.get() - .1);
+                 }
+                 //gearMotor.set(.5);//if right stick trigger is pressed, set motor to 50% speed
+             }
              if(rightStick.getTrigger()){
-                 gearMotor.set(.5);//if right stick trigger is pressed, set motor to 50% speed
+                 Jaguar motor;
+                 motor = new Jaguar(2);
+                 if(motor.get() > -1){
+                 motor.set(motor.get() - .1);
+                 }
+                 //gearMotor.set(.5);//if right stick trigger is pressed, set motor to 50% speed
              }
              else{
-                 gearMotor.set(0);
+                 //gearMotor.set(0);
              }
         }
     }
