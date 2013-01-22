@@ -15,9 +15,8 @@ public class RobotTemplate extends SimpleRobot {
     public RobotDrive drivetrain;
     public Joystick leftStick;
     public Joystick rightStick;
-    public DriverStationLCD lcd;
+    //public DriverStationLCD lcd;
     //public Victor gearMotor;
-    
 
 
     public RobotTemplate() {
@@ -54,7 +53,7 @@ public class RobotTemplate extends SimpleRobot {
          while(isOperatorControl() && isEnabled() ){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
-             if(leftStick.getTrigger()){
+             /*if(leftStick.getTrigger()){
                  lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
                  Jaguar motor;
                  motor = new Jaguar(1);
@@ -73,7 +72,7 @@ public class RobotTemplate extends SimpleRobot {
              }
              else{
                  //gearMotor.set(0);
-             }
+             }*/
         }
     }
 }
