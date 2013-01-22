@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Jaguar;
-import edu.wpi.first.wpilibj.DriverStationLCD;
+//import edu.wpi.first.wpilibj.Jaguar;
+//import edu.wpi.first.wpilibj.DriverStationLCD;
 
 
 public class RobotTemplate extends SimpleRobot {
