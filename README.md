@@ -1,2 +1,2 @@
-This is the git repository for team 4454. Please save your changes in a new branch that is named descriptively.
+This is the git repository for team 4454. Please use commit notes so we know what is being changed.
 ============
