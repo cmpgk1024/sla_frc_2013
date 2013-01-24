@@ -41,9 +41,7 @@ public class RobotTemplate extends IterativeRobot {
         // schedule the autonomous command (example)
         autonomousCommand.start();
     }
-    
-    
-    // GIT TEST
+
     /**
      * This function is called periodically during autonomous
      */
@@ -66,3 +64,4 @@ public class RobotTemplate extends IterativeRobot {
         Scheduler.getInstance().run();
     }
 }
+//Github test
