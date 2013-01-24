@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Relay;
 //import edu.wpi.first.wpilibj.Jaguar;
 //import edu.wpi.first.wpilibj.DriverStationLCD;
 
@@ -28,6 +29,7 @@ public class RobotTemplate extends SimpleRobot {
         //gearMotor = new Victor(5); //initialize speed controller
         
         //2-Wheel tank drive
+        Relay spikeA = new Relay(1);
         drivetrain = new RobotDrive(1,2);
         
         //4-Wheel tank drive
@@ -50,9 +52,11 @@ public class RobotTemplate extends SimpleRobot {
 
     public void operatorControl() {
          drivetrain.setSafetyEnabled(true);
+         
          while(isOperatorControl() && isEnabled() ){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
+             spikeA.set(Relay.Value.kForward);
              /*if(leftStick.getTrigger()){
                  lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
                  Jaguar motor;
