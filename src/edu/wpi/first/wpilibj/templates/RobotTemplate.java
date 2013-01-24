@@ -17,6 +17,7 @@ public class RobotTemplate extends SimpleRobot {
     public Relay spikeA;
     public Joystick leftStick;
     public Joystick rightStick;
+    public String controlScheme = "twostick";
     //public DriverStationLCD lcd;
     //public Victor gearMotor;
 
@@ -54,14 +55,18 @@ public class RobotTemplate extends SimpleRobot {
     public void operatorControl() {
          drivetrain.setSafetyEnabled(true);
          
-         while(isOperatorControl() && isEnabled() ){
+         while(isOperatorControl() && isEnabled() && controlScheme == "twostick"){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
              if(rightStick.getTrigger()){
-             spikeA.set(Relay.Value.kForward);
+                spikeA.set(Relay.Value.kForward);
              }
-             else{
-                 spikeA.set(Relay.Value.kOff);
+                else{
+                spikeA.set(Relay.Value.kOff);
+             }
+             
+             if(leftStick.getTrigger()) {
+                 controlScheme = "onestick";
              }
              /*if(leftStick.getTrigger()){
                  lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
@@ -84,6 +89,15 @@ public class RobotTemplate extends SimpleRobot {
                  //gearMotor.set(0);
              }*/
         }
+         
+         while(isOperatorControl() && isEnabled() && controlScheme == "onestick") {
+             drivetrain.arcadeDrive(leftStick);
+             Timer.delay(0.01);
+             
+             if(leftStick.getTrigger()) {
+                 controlScheme = "twostick";
+             }
+         }
     }
 }
 
