@@ -14,6 +14,7 @@ public class RobotTemplate extends SimpleRobot {
      * This function is called once each time the robot enters autonomous mode.
      */
     public RobotDrive drivetrain;
+    public Relay spikeA;
     public Joystick leftStick;
     public Joystick rightStick;
     //public DriverStationLCD lcd;
@@ -29,7 +30,7 @@ public class RobotTemplate extends SimpleRobot {
         //gearMotor = new Victor(5); //initialize speed controller
         
         //2-Wheel tank drive
-        Relay spikeA = new Relay(1);
+        spikeA = new Relay(1);
         drivetrain = new RobotDrive(1,2);
         
         //4-Wheel tank drive
