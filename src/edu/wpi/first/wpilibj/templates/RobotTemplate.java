@@ -57,7 +57,12 @@ public class RobotTemplate extends SimpleRobot {
          while(isOperatorControl() && isEnabled() ){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
+             if(rightStick.getTrigger()){
              spikeA.set(Relay.Value.kForward);
+             }
+             else{
+                 spikeA.set(Relay.Value.kOff);
+             }
              /*if(leftStick.getTrigger()){
                  lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
                  Jaguar motor;
