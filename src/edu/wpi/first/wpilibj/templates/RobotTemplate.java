@@ -55,7 +55,7 @@ public class RobotTemplate extends SimpleRobot {
     public void operatorControl() {
          drivetrain.setSafetyEnabled(true);
          
-         while(isOperatorControl() && isEnabled() && controlScheme == "twostick"){
+         while(isOperatorControl() && isEnabled()){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
              if(rightStick.getTrigger()){
@@ -65,8 +65,20 @@ public class RobotTemplate extends SimpleRobot {
                 spikeA.set(Relay.Value.kOff);
              }
              
+             if(controlScheme == "twostick") {
+                 drivetrain.tankDrive(leftStick, rightStick);
+             }
+             
+             if(controlScheme == "onestick") {
+                 drivetrain.arcadeDrive(leftStick);
+             }
+             
              if(leftStick.getTrigger()) {
-                 controlScheme = "onestick";
+                 if (controlScheme == "twostick") {
+                     controlScheme = "onestick";
+                 } else {
+                     controlScheme = "twostick";
+                 }
              }
              /*if(leftStick.getTrigger()){
                  lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
@@ -89,15 +101,7 @@ public class RobotTemplate extends SimpleRobot {
                  //gearMotor.set(0);
              }*/
         }
-         
-         while(isOperatorControl() && isEnabled() && controlScheme == "onestick") {
-             drivetrain.arcadeDrive(leftStick);
-             Timer.delay(0.01);
-             
-             if(leftStick.getTrigger()) {
-                 controlScheme = "twostick";
-             }
-         }
     }
 }
+
 
