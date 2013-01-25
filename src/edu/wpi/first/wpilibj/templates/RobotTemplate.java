@@ -53,11 +53,14 @@ public class RobotTemplate extends SimpleRobot {
 
 
     public void operatorControl() {
-         drivetrain.setSafetyEnabled(true);
+         
+        drivetrain.setSafetyEnabled(true);
          
          while(isOperatorControl() && isEnabled()){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
+             
+             // Test spike relay code
              if(rightStick.getTrigger()){
                 spikeA.set(Relay.Value.kForward);
              }
@@ -65,6 +68,8 @@ public class RobotTemplate extends SimpleRobot {
                 spikeA.set(Relay.Value.kOff);
              }
              
+             // Switches control scheme from "tank" to "arcade"
+             // when left trigger is pressed
              if(controlScheme == "twostick") {
                  drivetrain.tankDrive(leftStick, rightStick);
              }
