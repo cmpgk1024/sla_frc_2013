@@ -70,16 +70,16 @@ public class RobotTemplate extends SimpleRobot {
              
              // Switches control scheme from "tank" to "arcade"
              // when left trigger is pressed
-             if(controlScheme == "twostick") {
+             if(controlScheme.equals("twostick")) {
                  drivetrain.tankDrive(leftStick, rightStick);
              }
              
-             if(controlScheme == "onestick") {
+             if(controlScheme.equals("onestick")) {
                  drivetrain.arcadeDrive(leftStick);
              }
              
              if(leftStick.getTrigger()) {
-                 if (controlScheme == "twostick") {
+                 if (controlScheme.equals("twostick")) {
                      controlScheme = "onestick";
                  } else {
                      controlScheme = "twostick";
