@@ -27,7 +27,7 @@ public class RobotTemplate extends SimpleRobot {
         getWatchdog().setEnabled(false);
         leftStick = new Joystick(1);
         rightStick  = new Joystick(2);
-        compressor = new Compressor(2, 1, 3, 2); 
+        compressor = new Compressor(2, 1, 3, 4); 
        
         //gearMotor = new Victor(5); //initialize speed controller
         
