@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Compressor;
 //import edu.wpi.first.wpilibj.Jaguar;
 //import edu.wpi.first.wpilibj.DriverStationLCD;
 
@@ -18,6 +19,7 @@ public class RobotTemplate extends SimpleRobot {
     public Joystick leftStick;
     public Joystick rightStick;
     public String controlScheme = "twostick";
+    public Compressor pnuematicA;
     //public DriverStationLCD lcd;
     //public Victor gearMotor;
 
@@ -32,6 +34,7 @@ public class RobotTemplate extends SimpleRobot {
         
         //2-Wheel tank drive
         spikeA = new Relay(1);
+        pnuematicA = new Compressor(9403, 1, 9472, 2);
         drivetrain = new RobotDrive(1,2);
         
         //4-Wheel tank drive
@@ -62,10 +65,12 @@ public class RobotTemplate extends SimpleRobot {
              
              // Test spike relay code
              if(rightStick.getTrigger()){
-                spikeA.set(Relay.Value.kOn);
+                spikeA.set(Relay.Value.kForward);
+                pnuematicA.start();
              }
                 else{
                 spikeA.set(Relay.Value.kOff);
+                pnuematicA.stop();
              }
              
              // Switches control scheme from "tank" to "arcade"
