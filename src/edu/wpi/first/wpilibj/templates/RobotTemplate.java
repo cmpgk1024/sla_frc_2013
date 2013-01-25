@@ -62,7 +62,7 @@ public class RobotTemplate extends SimpleRobot {
              
              // Test spike relay code
              if(rightStick.getTrigger()){
-                spikeA.set(Relay.Value.kForward);
+                spikeA.set(Relay.Value.kOn);
              }
                 else{
                 spikeA.set(Relay.Value.kOff);
