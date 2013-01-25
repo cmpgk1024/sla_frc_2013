@@ -85,7 +85,7 @@ public class RobotTemplate extends SimpleRobot {
              
              // Switches control scheme from "tank" to "arcade"
              // when left trigger is pressed
-             if(controlScheme.equals("twostick")) {
+             /*if(controlScheme.equals("twostick")) {
                  drivetrain.tankDrive(leftStick, rightStick);
              }
              
@@ -99,7 +99,7 @@ public class RobotTemplate extends SimpleRobot {
                  } else {
                      controlScheme = "twostick";
                  }
-             }
+             }*/
              /*if(leftStick.getTrigger()){
                  lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
                  Jaguar motor;
