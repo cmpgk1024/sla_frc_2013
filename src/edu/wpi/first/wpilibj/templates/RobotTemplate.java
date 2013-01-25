@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.Jaguar;
 //import edu.wpi.first.wpilibj.DriverStationLCD;
 
@@ -14,6 +15,7 @@ public class RobotTemplate extends SimpleRobot {
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
+    public Solenoid pressureValve;
     public RobotDrive drivetrain;
     public Relay spikeA;
     public Joystick leftStick;
@@ -36,12 +38,15 @@ public class RobotTemplate extends SimpleRobot {
         spikeA = new Relay(1);
         pnuematicA = new Compressor(1,2);
         drivetrain = new RobotDrive(1,2);
+        pressureValve = new Solenoid(9472, 6);
         
         //4-Wheel tank drive
         //Motors must be set in the following order:
         //LeftFront=1; LeftRear=2; RightFront=3; RightRear=4;
         //drivetrain = new RobotDrive(1,2,3,4);
         //drivetrain.tankDrive(leftStick, rightStick);
+        pnuematicA.start();
+        pressureValve.set(false);
     }
 
 
@@ -62,15 +67,20 @@ public class RobotTemplate extends SimpleRobot {
          while(isOperatorControl() && isEnabled()){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
-             
+             if(!pnuematicA.getPressureSwitchValue() && !pnuematicA.enabled()){
+                 pnuematicA.start();
+             }
+             else{
+                 pnuematicA.stop();
+             }
              // Test spike relay code
              if(rightStick.getTrigger()){
                 spikeA.set(Relay.Value.kForward);
-                pnuematicA.start();
+                pressureValve.set(true);
              }
                 else{
                 spikeA.set(Relay.Value.kOff);
-                pnuematicA.stop();
+                pressureValve.set(false);
              }
              
              // Switches control scheme from "tank" to "arcade"
