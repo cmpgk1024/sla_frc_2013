@@ -31,7 +31,7 @@ public class RobotTemplate extends SimpleRobot {
         rightStick  = new Joystick(2);
         
         //gearMotor = new Victor(5); //initialize speed controller
-        
+         
         //2-Wheel tank drive
         spikeA = new Relay(1);
         pnuematicA = new Compressor(1,2);
