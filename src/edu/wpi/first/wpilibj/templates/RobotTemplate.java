@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.Jaguar;
 //import edu.wpi.first.wpilibj.DriverStationLCD;
 
@@ -12,9 +15,13 @@ public class RobotTemplate extends SimpleRobot {
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
+    public Solenoid pressureValve;
     public RobotDrive drivetrain;
+    public Relay spikeA;
     public Joystick leftStick;
     public Joystick rightStick;
+    public String controlScheme = "twostick";
+    public Compressor pnuematicA;
     //public DriverStationLCD lcd;
     //public Victor gearMotor;
 
@@ -26,15 +33,20 @@ public class RobotTemplate extends SimpleRobot {
         rightStick  = new Joystick(2);
         
         //gearMotor = new Victor(5); //initialize speed controller
-        
+         
         //2-Wheel tank drive
+        spikeA = new Relay(1);
+        pnuematicA = new Compressor(1,2);
         drivetrain = new RobotDrive(1,2);
+        pressureValve = new Solenoid(9472, 6);
         
         //4-Wheel tank drive
         //Motors must be set in the following order:
         //LeftFront=1; LeftRear=2; RightFront=3; RightRear=4;
         //drivetrain = new RobotDrive(1,2,3,4);
         //drivetrain.tankDrive(leftStick, rightStick);
+        pnuematicA.start();
+        pressureValve.set(false);
     }
 
 
@@ -49,10 +61,45 @@ public class RobotTemplate extends SimpleRobot {
 
 
     public void operatorControl() {
-         drivetrain.setSafetyEnabled(true);
-         while(isOperatorControl() && isEnabled() ){
+         
+        drivetrain.setSafetyEnabled(true);
+         
+         while(isOperatorControl() && isEnabled()){
              drivetrain.tankDrive(leftStick, rightStick);
              Timer.delay(0.01);
+             if(!pnuematicA.getPressureSwitchValue() && !pnuematicA.enabled()){
+                 pnuematicA.start();
+             }
+             else{
+                 pnuematicA.stop();
+             }
+             // Test spike relay code
+             if(rightStick.getTrigger()){
+                spikeA.set(Relay.Value.kForward);
+                pressureValve.set(true);
+             }
+                else{
+                spikeA.set(Relay.Value.kOff);
+                pressureValve.set(false);
+             }
+             
+             // Switches control scheme from "tank" to "arcade"
+             // when left trigger is pressed
+             /*if(controlScheme.equals("twostick")) {
+                 drivetrain.tankDrive(leftStick, rightStick);
+             }
+             
+             if(controlScheme.equals("onestick")) {
+                 drivetrain.arcadeDrive(leftStick);
+             }
+             
+             if(leftStick.getTrigger()) {
+                 if (controlScheme.equals("twostick")) {
+                     controlScheme = "onestick";
+                 } else {
+                     controlScheme = "twostick";
+                 }
+             }*/
              /*if(leftStick.getTrigger()){
                  lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
                  Jaguar motor;
@@ -76,3 +123,5 @@ public class RobotTemplate extends SimpleRobot {
         }
     }
 }
+
+
