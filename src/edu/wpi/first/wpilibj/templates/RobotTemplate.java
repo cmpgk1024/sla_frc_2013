@@ -34,7 +34,7 @@ public class RobotTemplate extends SimpleRobot {
         
         //2-Wheel tank drive
         spikeA = new Relay(1);
-        pnuematicA = new Compressor(9403, 1, 9472, 2);
+        pnuematicA = new Compressor(1,2);
         drivetrain = new RobotDrive(1,2);
         
         //4-Wheel tank drive
