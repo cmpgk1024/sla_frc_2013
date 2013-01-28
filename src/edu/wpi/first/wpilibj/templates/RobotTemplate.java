@@ -1,158 +1,138 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) FIRST 2008. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package edu.wpi.first.wpilibj.templates;
 
+
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStationLCD;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Timer;
-//import edu.wpi.first.wpilibj.Jaguar;
-//import edu.wpi.first.wpilibj.DriverStationLCD;
 
 
-public class RobotTemplate extends SimpleRobot {
+/**
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the IterativeRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the manifest file in the resource
+ * directory.
+ */
+public class RobotTemplate extends IterativeRobot {
+    /*public Solenoid pistonUp;
+    public Solenoid pistonDown;*/
+    Solenoid sol3, sol4, sol5;
+    RobotDrive drivetrain;
+    Relay spikeA;
+    Joystick leftStick;
+    Joystick rightStick;
+    //public String controlScheme = "twostick";
+    int leftStickX, leftStickY;
+    Compressor compressorA;    
+    Jaguar leftJag;
+    Jaguar rightJag;
+    DriverStationLCD userMessages;
+    String controlScheme = "twostick";
+    
     /**
-     * This function is called once each time the robot enters autonomous mode.
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
      */
-    public Solenoid pistonUp;
-    public Solenoid pistonDown;
-    public Solenoid sol3, sol4, sol5;
-    public RobotDrive drivetrain;
-    public Relay spikeA;
-    public Joystick leftStick;
-    public Joystick rightStick;
-    public String controlScheme = "twostick";
-    public int leftStickX, leftStickY;
-    public Compressor pnuematicA;
-    //public DriverStationLCD lcd;
-    //public Victor gearMotor;
-
-
-    public RobotTemplate() {
+    public void robotInit() {
         //Instantialize objects for RobotTemplate
-        getWatchdog().setEnabled(false);
         leftStick = new Joystick(1);
         rightStick  = new Joystick(2);
+        userMessages = DriverStationLCD.getInstance();
         
-        //gearMotor = new Victor(5); //initialize speed controller
-         
         //2-Wheel tank drive
         spikeA = new Relay(1);
-        pnuematicA = new Compressor(1,2);
+        compressorA = new Compressor(1,2);
         drivetrain = new RobotDrive(1,2);
-        pistonUp = new Solenoid(1);
+        //leftJag = new Jaguar(1);
+        //rightJag = new Jaguar(2);
+
+        /*pistonUp = new Solenoid(1);
         pistonDown = new Solenoid(2);
         sol3 = new Solenoid(3);
         sol4 = new Solenoid(4);
-        sol5 = new Solenoid(5);
+        sol5 = new Solenoid(5);*/
+        
         //4-Wheel tank drive
         //Motors must be set in the following order:
         //LeftFront=1; LeftRear=2; RightFront=3; RightRear=4;
         //drivetrain = new RobotDrive(1,2,3,4);
         //drivetrain.tankDrive(leftStick, rightStick);
-        pnuematicA.start();
-        pistonDown.set(true);
-        pistonUp.set(true);
+        compressorA.start();
+        /*pistonDown.set(true);
+        pistonUp.set(true);*/
+    }
+
+    /**
+     * This function is called periodically during autonomous
+     */
+    public void autonomousPeriodic() {
         
     }
 
-
-    public void autonomous() {
-        for (int i = 0; i < 4; i++){
-            drivetrain.drive(0.5, 0.0); // drive 50% fwd 0% turn
-            Timer.delay(2.0);    // wait 2 seconds
-            drivetrain.drive(0.0, 0.75); // drive 0% fwd, 75% turn
-        }
-        drivetrain.drive(0.0, 0.0);   // drive 0% forward, 0% turn
+    public void telopInit() {
+        //drivetrain.setSafetyEnabled(true);
+        //drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
     }
-
-
-    public void operatorControl() {
-         
-        drivetrain.setSafetyEnabled(true);
-        
-         while(isOperatorControl() && isEnabled()){
-             //drivetrain.tankDrive(leftStick, rightStick);
-             Timer.delay(0.01);
-             sol3.set(true);
-             sol4.set(true);
-             sol5.set(true);
-             /*if(!pnuematicA.getPressureSwitchValue() && !pnuematicA.enabled()){
-                pnuematicA.start();
-                Timer.delay(5.0);
-             }
-             
-             else{
-                 pnuematicA.stop();
-                 Timer.delay(5.0);
-             }
-             */
-             
-             if (leftStick.getTrigger()) {
-                 pnuematicA.start();
-                 Timer.delay(0.01);
-             } else {
-                 pnuematicA.stop();
-                 Timer.delay(0.01);
-             }
-             
-           
-             // Test spike relay code
-             if(rightStick.getTrigger()){
-                //spikeA.set(Relay.Value.kOn);
-                pistonUp.set(false);
-                pistonDown.set(false);
-             } else {
-                 pistonUp.set(true);
-                 pistonDown.set(true);
-             }
-             
-             //if (rightStick.getRawButton(3)) {
-                 //spikeA.set(Relay.Value.kOff);
-                 //pistonUp.set(false);
-                 //pistonDown.set(true);
-             //}
-             
-             // Switches control scheme from "tank" to "arcade"
-             // when left trigger is pressed
-             if(leftStick.getRawButton(6)) {
-                 //drivetrain.tankDrive(leftStick, rightStick);
-                 controlScheme = "twostick";
-             }
-             
-             if(leftStick.getRawButton(7)) {
-                 //drivetrain.arcadeDrive(leftStick);
-                 controlScheme = "onestick";
-             }
-             
-             if (controlScheme.equals("twostick")) {
-                 drivetrain.tankDrive(rightStick, leftStick);
-             } else {
-                 drivetrain.arcadeDrive(leftStick);
-                 //drivetrain.arcadeDrive(leftStick, int(leftStick.getY()), leftStick, int(-leftStick.getX()));
-             }
-             
-             /*if(leftStick.getTrigger()){
-                 lcd.println(DriverStationLCD.Line.kUser2, 1, motor.get());
-                 Jaguar motor;
-                 motor = new Jaguar(1);
-                 if(motor.get() > -1){
-                 motor.set(motor.get() - .1);
-                 }
-                 //gearMotor.set(.5);//if right stick trigger is pressed, set motor to 50% speed
-             }
-             if(rightStick.getTrigger()){
-                 Jaguar motor;
-                 motor = new Jaguar(2);
-                 if(motor.get() > -1){
-                 motor.set(motor.get() - .1);
-                 }
-                 //gearMotor.set(.5);//if right stick trigger is pressed, set motor to 50% speed
-             }
-             else{
-                 //gearMotor.set(0);
-             }*/
+    
+    /**
+     * This function is called periodically during operator control
+     */
+    public void teleopPeriodic() {
+        //getWatchdog().setEnabled(true);
+        drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
+        if (compressorA.getPressureSwitchValue() == true) {
+            compressorA.stop();
+            printMsg("Compressor stopped.  PressureSwitchValue \"True\".");
         }
+        /*
+        //Switch between "onestick" and "twostick" control schemes
+        if (rightStick.getRawButton(6)) {
+            controlScheme = "twostick";
+        }
+        if (rightStick.getRawButton(7)) {
+            controlScheme = "onestick";
+        }
+        
+        if (controlScheme == "twostick") {
+            drivetrain.tankDrive(leftStick, rightStick);
+            printMsg("Tankdrive activated.");
+        }
+        else if (controlScheme.equals("onestick")) {
+            drivetrain.arcadeDrive(leftStick);
+            printMsg("Arcade drive activated.");
+        }
+        */
+        //Rotate in-place left and right, respectively
+        if (leftStick.getRawButton(8)) {
+            drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
+            printMsg("Rotating counterclockwise in place.");
+        }
+        if (leftStick.getRawButton(9)) {
+            drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
+            printMsg("Rotating clockwise in place.");
+        }
+
+        //userMessages.println(DriverStationLCD.Line.kMain6, 1, "This is a test" );
+        userMessages.updateLCD();
+    }
+    
+    /*public void disabledInit() {
+        compressorA.stop();
+    }*/
+    
+    public void printMsg(String message) {
+        userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
     }
 }
