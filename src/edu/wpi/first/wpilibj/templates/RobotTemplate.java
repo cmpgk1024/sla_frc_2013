@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class RobotTemplate extends IterativeRobot {
     /*public Solenoid pistonUp;
     public Solenoid pistonDown;*/
-    Solenoid sol3, sol4, sol5;
+    Solenoid solA, solB;
     RobotDrive drivetrain;
     Relay spikeA;
     Joystick leftStick;
@@ -47,14 +47,16 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void robotInit() {
         //Instantialize objects for RobotTemplate
-        leftStick = new Joystick(1);
-        rightStick  = new Joystick(2);
+        rightStick = new Joystick(1);
+        leftStick  = new Joystick(2);
         userMessages = DriverStationLCD.getInstance();
         
         //2-Wheel tank drive
         spikeA = new Relay(1);
         compressorA = new Compressor(1,2);
         drivetrain = new RobotDrive(1,2);
+        solA = new Solenoid(1);
+        solB = new Solenoid(2);
         //leftJag = new Jaguar(1);
         //rightJag = new Jaguar(2);
 
@@ -91,23 +93,45 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void teleopPeriodic() {
         //getWatchdog().setEnabled(true);
-        drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
-        if (compressorA.getPressureSwitchValue() == true) {
+        drivetrain.tankDrive(rightStick.getY(), leftStick.getY());
+        
+        /*
+         * if (compressorA.getPressureSwitchValue() == true) {
             compressorA.stop();
             printMsg("Compressor stopped.  PressureSwitchValue \"True\".");
+        }
+        */
+        
+        //Pneumatics test code
+        if (leftStick.getTrigger()) {
+            solA.set(true);
+            solB.set(false);
+            printMsg("Solenoid opened.");
+        } else {
+            solA.set(false);
+            solB.set(true);
+            printMsg("Solenoid stopped.");
+        }
+        
+        if (rightStick.getTrigger()) {
+            compressorA.start();
+            printMsg("Compressor started.");
+        } else {
+            compressorA.stop();
+            printMsg("Compressor stopped.");
         }
         
         
         //Switch between "onestick" and "twostick" control schemes
-        if (rightStick.getRawButton(6)) {
+        if (leftStick.getRawButton(6)) {
             controlScheme = "twostick";
         }
-        if (rightStick.getRawButton(7)) {
+        if (leftStick.getRawButton(7)) {
             controlScheme = "onestick";
         }
         
         if (controlScheme.equals("twostick")) {
-            drivetrain.tankDrive(leftStick, rightStick);
+            drivetrain.tankDrive(rightStick, leftStick);
             printMsg("Tankdrive activated.");
         }
         else if (controlScheme.equals("onestick")) {
