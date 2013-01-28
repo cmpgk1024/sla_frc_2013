@@ -96,7 +96,8 @@ public class RobotTemplate extends IterativeRobot {
             compressorA.stop();
             printMsg("Compressor stopped.  PressureSwitchValue \"True\".");
         }
-        /*
+        
+        
         //Switch between "onestick" and "twostick" control schemes
         if (rightStick.getRawButton(6)) {
             controlScheme = "twostick";
@@ -105,7 +106,7 @@ public class RobotTemplate extends IterativeRobot {
             controlScheme = "onestick";
         }
         
-        if (controlScheme == "twostick") {
+        if (controlScheme.equals("twostick")) {
             drivetrain.tankDrive(leftStick, rightStick);
             printMsg("Tankdrive activated.");
         }
@@ -113,7 +114,7 @@ public class RobotTemplate extends IterativeRobot {
             drivetrain.arcadeDrive(leftStick);
             printMsg("Arcade drive activated.");
         }
-        */
+        
         //Rotate in-place left and right, respectively
         if (leftStick.getRawButton(8)) {
             drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
