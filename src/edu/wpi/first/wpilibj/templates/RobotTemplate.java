@@ -80,7 +80,9 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        
+        drivetrain.drive(1, 0);
+        Thread.sleep(1000);
+        drivetrain.drive(0, 0);
     }
 
     public void telopInit() {
@@ -107,7 +109,8 @@ public class RobotTemplate extends IterativeRobot {
             solA.set(true);
             solB.set(false);
             printMsg("Solenoid opened.");
-        } else {
+        } 
+        else {
             solA.set(false);
             solB.set(true);
             printMsg("Solenoid stopped.");
@@ -116,7 +119,8 @@ public class RobotTemplate extends IterativeRobot {
         if (rightStick.getTrigger()) {
             compressorA.start();
             printMsg("Compressor started.");
-        } else {
+        }
+        else {
             compressorA.stop();
             printMsg("Compressor stopped.");
         }
