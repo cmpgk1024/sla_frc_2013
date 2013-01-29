@@ -77,6 +77,7 @@ public class RobotTemplate extends IterativeRobot {
         compressorA.start();
         /*pistonDown.set(true);
         pistonUp.set(true);*/
+        DigitalInput switchA = new DigitalInput(2);//remember to check port
     }
 
     /**
@@ -112,6 +113,14 @@ public class RobotTemplate extends IterativeRobot {
             solA.set(true);
             solB.set(false);
             printMsg("Solenoid opened.");
+            //test for limit switch
+            if(!switchA.get()){//if switch isn't tripped
+            	printMsg("Moving motor.")
+            	//move motor
+            }
+            else{
+            	//stop motor/do stuff that needs to happen when motor stops
+            }
         } 
         else {
             solA.set(false);
