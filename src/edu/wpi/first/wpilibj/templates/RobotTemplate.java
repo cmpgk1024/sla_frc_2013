@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
+
 
 
 /**
@@ -40,6 +42,7 @@ public class RobotTemplate extends IterativeRobot {
     Jaguar rightJag;
     DriverStationLCD userMessages;
     String controlScheme = "twostick";
+    Timer timer;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -81,13 +84,7 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         drivetrain.drive(1, 0);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-        	StringWriter errors = new StringWriter();
-        	ex.printStackTrace(new PrintWriter(errors));
-        	printMsg(errors.toString());
-        }
+        Timer.delay(1000);
         drivetrain.drive(0, 0);
     }
 
