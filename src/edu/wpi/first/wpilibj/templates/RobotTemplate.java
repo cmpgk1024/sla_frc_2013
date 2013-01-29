@@ -84,7 +84,9 @@ public class RobotTemplate extends IterativeRobot {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
-            ex.printStackTrace();
+        	StringWriter errors = new StringWriter();
+        	ex.printStackTrace(new PrintWriter(errors));
+        	printMsg(errors.toString());
         }
         drivetrain.drive(0, 0);
     }
