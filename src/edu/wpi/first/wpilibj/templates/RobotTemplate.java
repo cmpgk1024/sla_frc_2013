@@ -81,7 +81,11 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         drivetrain.drive(1, 0);
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         drivetrain.drive(0, 0);
     }
 
