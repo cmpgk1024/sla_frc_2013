@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 
 
 /**
@@ -43,6 +43,7 @@ public class RobotTemplate extends IterativeRobot {
     DriverStationLCD userMessages;
     String controlScheme = "twostick";
     Timer timer;
+    DigitalInput switchA;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -77,7 +78,7 @@ public class RobotTemplate extends IterativeRobot {
         compressorA.start();
         /*pistonDown.set(true);
         pistonUp.set(true);*/
-        DigitalInput switchA = new DigitalInput(2);//remember to check port
+        switchA = new DigitalInput(2);//remember to check port
     }
 
     /**
@@ -115,7 +116,7 @@ public class RobotTemplate extends IterativeRobot {
             printMsg("Solenoid opened.");
             //test for limit switch
             if(!switchA.get()){//if switch isn't tripped
-            	printMsg("Moving motor.")
+            	printMsg("Moving motor.");
             	//move motor
             }
             else{
