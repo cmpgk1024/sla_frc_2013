@@ -105,6 +105,7 @@ public class RobotTemplate extends IterativeRobot {
         
         if(!compressorA.enabled()){
         	compressorA.start();
+                printMsg("Compressor started.");
         }
         
         /*
@@ -131,7 +132,7 @@ public class RobotTemplate extends IterativeRobot {
         else {
             solA.set(false);
             solB.set(true);
-            printMsg("Solenoid stopped.");
+            printMsg("Solenoid closed.");
         }
         
         if (rightStick.getTrigger()) {
