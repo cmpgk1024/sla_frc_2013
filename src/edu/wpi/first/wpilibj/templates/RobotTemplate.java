@@ -126,10 +126,10 @@ public class RobotTemplate extends IterativeRobot {
             //test for limit switch
             if(!switchA.get()){//if switch isn't tripped
             	printMsg("Moving motor.");
-            	//We need to put a "move motor" script here
+            	victor.set(1); //start motor
             }
             else{
-            	//stop motor/do stuff that needs to happen when motor stops
+            	victor.set(0); //stop motor
             }
         } 
         else {
