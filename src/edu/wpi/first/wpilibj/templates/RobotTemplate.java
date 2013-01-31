@@ -9,6 +9,7 @@ package edu.wpi.first.wpilibj.templates;
 
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Victor;
 
 
 /**
@@ -44,6 +45,7 @@ public class RobotTemplate extends IterativeRobot {
     String controlScheme = "twostick";
     Timer timer;
     DigitalInput switchA;
+    Victor victor;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -61,6 +63,7 @@ public class RobotTemplate extends IterativeRobot {
         drivetrain = new RobotDrive(1,2);
         solA = new Solenoid(1);
         solB = new Solenoid(2);
+        victor = new Victor(3);
         //leftJag = new Jaguar(1);
         //rightJag = new Jaguar(2);
 
@@ -123,7 +126,7 @@ public class RobotTemplate extends IterativeRobot {
             //test for limit switch
             if(!switchA.get()){//if switch isn't tripped
             	printMsg("Moving motor.");
-            	//move motor
+            	//We need to put a "move motor" script here
             }
             else{
             	//stop motor/do stuff that needs to happen when motor stops
