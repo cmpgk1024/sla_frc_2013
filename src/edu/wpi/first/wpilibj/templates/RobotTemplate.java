@@ -104,7 +104,7 @@ public class RobotTemplate extends IterativeRobot {
         drivetrain.tankDrive(rightStick.getY(), leftStick.getY());
         
         if(!compressorA.enabled()){
-        	compressorA.start();
+        	compressorA.start(); //Start the compressor if it's enabled
                 printMsg("Compressor started.");
         }
         
@@ -117,8 +117,8 @@ public class RobotTemplate extends IterativeRobot {
         
         //Pneumatics test code
         if (leftStick.getTrigger()) {
-            solA.set(true);
-            solB.set(false);
+            solA.set(true); 
+            solB.set(false); //Checks if solenoid should be opened
             printMsg("Solenoid opened.");
             //test for limit switch
             if(!switchA.get()){//if switch isn't tripped
@@ -131,7 +131,7 @@ public class RobotTemplate extends IterativeRobot {
         } 
         else {
             solA.set(false);
-            solB.set(true);
+            solB.set(true); //Checks if solenoid should be closed
             printMsg("Solenoid closed.");
         }
         
