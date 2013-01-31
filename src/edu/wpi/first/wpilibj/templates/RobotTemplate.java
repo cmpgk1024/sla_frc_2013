@@ -92,8 +92,8 @@ public class RobotTemplate extends IterativeRobot {
     public void telopInit() {
         //drivetrain.setSafetyEnabled(true);
         //drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
-        compressorA.start();
-        printMsg("Compressor started.");
+        //compressorA.start();
+        //printMsg("Compressor started.");
     }
     
     /**
@@ -102,6 +102,10 @@ public class RobotTemplate extends IterativeRobot {
     public void teleopPeriodic() {
         //getWatchdog().setEnabled(true);
         drivetrain.tankDrive(rightStick.getY(), leftStick.getY());
+        
+        if(!compressorA.enabled()){
+        	compressorA.start();
+        }
         
         /*
          * if (compressorA.getPressureSwitchValue() == true) {
