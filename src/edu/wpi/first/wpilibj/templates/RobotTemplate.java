@@ -75,7 +75,6 @@ public class RobotTemplate extends IterativeRobot {
         //LeftFront=1; LeftRear=2; RightFront=3; RightRear=4;
         //drivetrain = new RobotDrive(1,2,3,4);
         //drivetrain.tankDrive(leftStick, rightStick);
-        compressorA.start();
         /*pistonDown.set(true);
         pistonUp.set(true);*/
         switchA = new DigitalInput(2);//remember to check port
@@ -93,6 +92,8 @@ public class RobotTemplate extends IterativeRobot {
     public void telopInit() {
         //drivetrain.setSafetyEnabled(true);
         //drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
+        compressorA.start();
+        printMsg("Compressor started.");
     }
     
     /**
@@ -130,12 +131,8 @@ public class RobotTemplate extends IterativeRobot {
         }
         
         if (rightStick.getTrigger()) {
-            compressorA.start();
-            printMsg("Compressor started.");
         }
         else {
-            compressorA.stop();
-            printMsg("Compressor stopped.");
         }
         
         
