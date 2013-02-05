@@ -29,6 +29,9 @@ import edu.wpi.first.wpilibj.Victor;
  * directory.
  */
 public class RobotTemplate extends IterativeRobot {
+    public void printMsg(String message) {
+        userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
+    }
     /*public Solenoid pistonUp;
     public Solenoid pistonDown;*/
     Solenoid solA, solB;
@@ -180,7 +183,4 @@ public class RobotTemplate extends IterativeRobot {
         compressorA.stop();
     }*/
     
-    public void printMsg(String message) {
-        userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
-    }
 }
