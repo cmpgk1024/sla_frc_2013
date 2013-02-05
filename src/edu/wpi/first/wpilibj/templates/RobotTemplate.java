@@ -103,6 +103,14 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	if(switchA.get()){//if switch isn't tripped
+        	printMsg("Moving motor.");
+        	//victor.set(0.5); //start motor
+        }
+        else{
+        	printMsg("Motor stopped");
+        	//victor.set(0); //stop motor
+        }
         //getWatchdog().setEnabled(true);
         drivetrain.tankDrive(rightStick.getY(), leftStick.getY());
         
@@ -124,13 +132,6 @@ public class RobotTemplate extends IterativeRobot {
             solB.set(false); //Checks if solenoid should be opened
             printMsg("Solenoid opened.");
             //test for limit switch
-            if(!switchA.get()){//if switch isn't tripped
-            	printMsg("Moving motor.");
-            	//victor.set(0.5); //start motor
-            }
-            else{
-            	//victor.set(0); //stop motor
-            }
         } 
         else {
             solA.set(false);
