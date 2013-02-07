@@ -106,14 +106,14 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	if(switchA.get()){//if switch isn't tripped
+    	/*if(switchA.get()){//if switch isn't tripped
         	printMsg("Moving motor.");
         	//victor.set(0.5); //start motor
         }
         else{
         	printMsg("Motor stopped");
         	//victor.set(0); //stop motor
-        }
+        }*/
         //getWatchdog().setEnabled(true);
         drivetrain.tankDrive(rightStick.getY(), leftStick.getY());
         
@@ -165,6 +165,14 @@ public class RobotTemplate extends IterativeRobot {
             printMsg("Arcade drive activated.");
         }
         
+        if(switchA.get()){//if switch isn't tripped
+        	printMsg("Moving motor.");
+        	//victor.set(0.5); //start motor
+        }
+        else{
+        	printMsg("Motor stopped");
+        	//victor.set(0); //stop motor
+        }
         //Rotate in-place left and right, respectively
         if (leftStick.getRawButton(8)) {
             drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
