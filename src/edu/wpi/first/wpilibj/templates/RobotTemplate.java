@@ -8,17 +8,14 @@
 package edu.wpi.first.wpilibj.templates;
 
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Relay;
+//import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Victor;
 
 
 /**
@@ -32,23 +29,16 @@ public class RobotTemplate extends IterativeRobot {
     public void printMsg(String message) {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
     }
-    /*public Solenoid pistonUp;
-    public Solenoid pistonDown;*/
-    Solenoid solA, solB;
     RobotDrive drivetrain;
-    Relay spikeA;
+    //Relay spikeA;
     Joystick leftStick;
     Joystick rightStick;
     //public String controlScheme = "twostick";
     int leftStickX, leftStickY;
-    Compressor compressorA;    
-    Jaguar leftJag;
-    Jaguar rightJag;
     DriverStationLCD userMessages;
     String controlScheme = "twostick";
     Timer timer;
     DigitalInput switchA;
-    Victor victor;
     Jaguar launcher;
     
     /**
@@ -62,16 +52,9 @@ public class RobotTemplate extends IterativeRobot {
         userMessages = DriverStationLCD.getInstance();
         
         //2-Wheel tank drive
-        spikeA = new Relay(1);
-        compressorA = new Compressor(1,2);
+        //spikeA = new Relay(1);
         drivetrain = new RobotDrive(1,2);
-        solA = new Solenoid(1);
-        solB = new Solenoid(2);
-        victor = new Victor(3);
         launcher = new Jaguar(5);
-        //leftJag = new Jaguar(1);
-        //rightJag = new Jaguar(2);
-
         /*pistonUp = new Solenoid(1);
         pistonDown = new Solenoid(2);
         sol3 = new Solenoid(3);
@@ -119,29 +102,11 @@ public class RobotTemplate extends IterativeRobot {
         //getWatchdog().setEnabled(true);
         drivetrain.tankDrive(rightStick.getY(), leftStick.getY());
         
-        if(!compressorA.enabled()){
-        	compressorA.start(); //Start the compressor if it's enabled
-                printMsg("Compressor started.");
-        }
-        
-        /*
-         * if (compressorA.getPressureSwitchValue() == true) {
-            compressorA.stop();
-            printMsg("Compressor stopped.  PressureSwitchValue \"True\".");
-        }
-        */
         
         //Pneumatics test code
         if (leftStick.getTrigger()) {
-            solA.set(true); 
-            solB.set(false); //Checks if solenoid should be opened
-            printMsg("Solenoid opened.");
-            //test for limit switch
         } 
         else {
-            solA.set(false);
-            solB.set(true); //Checks if solenoid should be closed
-            printMsg("Solenoid closed.");
         }
         
         if (rightStick.getTrigger()) {
@@ -192,7 +157,6 @@ public class RobotTemplate extends IterativeRobot {
     }
     
     /*public void disabledInit() {
-        compressorA.stop();
     }*/
     
 }
