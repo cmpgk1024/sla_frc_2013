@@ -105,8 +105,10 @@ public class RobotTemplate extends IterativeRobot {
         
         //Pneumatics test code
         if (leftStick.getTrigger()) {
+        	launcher.set(-1);
         } 
         else {
+        	//don't set to 0 to avoid conflicts with right stick
         }
         
         if (rightStick.getTrigger()) {
