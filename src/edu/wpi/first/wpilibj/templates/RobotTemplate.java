@@ -49,6 +49,7 @@ public class RobotTemplate extends IterativeRobot {
     Timer timer;
     DigitalInput switchA;
     Victor victor;
+    Jaguar launcher;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -67,6 +68,7 @@ public class RobotTemplate extends IterativeRobot {
         solA = new Solenoid(1);
         solB = new Solenoid(2);
         victor = new Victor(3);
+        launcher = new Jaguar(5);
         //leftJag = new Jaguar(1);
         //rightJag = new Jaguar(2);
 
@@ -143,8 +145,10 @@ public class RobotTemplate extends IterativeRobot {
         }
         
         if (rightStick.getTrigger()) {
+        	launcher.set(1);
         }
         else {
+        	launcher.set(0);
         }
         
         
