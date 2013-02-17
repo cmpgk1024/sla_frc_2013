@@ -74,10 +74,14 @@ public class RobotTemplate extends IterativeRobot {
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {
-        drivetrain.drive(1, 0);
+    public void autonomousInit() {
+        drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
         Timer.delay(1000);
-        drivetrain.drive(0, 0);
+        drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
+        Timer.delay(500);
+        drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
+        Timer.delay(1000);
+        drivetrain.setLeftRightMotorOutputs(0, 0);
     }
 
     public void telopInit() {
