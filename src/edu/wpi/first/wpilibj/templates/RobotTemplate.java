@@ -60,8 +60,6 @@ public class RobotTemplate extends IterativeRobot {
         //spikeA = new Relay(1);
         drivetrain = new RobotDrive(1,2);
         launcher = new Jaguar(5);
-        
-        voltage = DriverStation.getInstance().getBatteryVoltage();
         /*pistonUp = new Solenoid(1);
         pistonDown = new Solenoid(2);
         sol3 = new Solenoid(3);
@@ -83,22 +81,29 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void autonomousInit() {
         
+        voltage = DriverStation.getInstance().getBatteryVoltage();
+        
         if (voltage > 11) {
             drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
-        if (voltage < 1) {
+        else if (voltage < 1) {
             drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
-        if (voltage < 7 && voltage > 5) {
+        else if (voltage < 7 && voltage > 5) {
             drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
+        }
+        
+        else {
+            Timer.delay(15);
+            teleopInit();
         }
         
         /*drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
