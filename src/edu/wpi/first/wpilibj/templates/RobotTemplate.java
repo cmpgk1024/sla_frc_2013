@@ -83,20 +83,14 @@ public class RobotTemplate extends IterativeRobot {
         
         voltage = DriverStation.getInstance().getBatteryVoltage();
         
-        if (voltage > 11) {
+        if (switchA.get()) {
             drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
-        else if (voltage < 1) {
+        else if (!switchA.get()) {
             drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
-            Timer.delay(1000);
-            drivetrain.setLeftRightMotorOutputs(0, 0);
-        }
-        
-        else if (voltage < 7 && voltage > 5) {
-            drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
