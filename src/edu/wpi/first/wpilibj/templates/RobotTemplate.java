@@ -102,7 +102,7 @@ public class RobotTemplate extends IterativeRobot {
         }
         
         else {
-            Timer.delay(15);
+            Timer.delay(15000);
             teleopInit();
         }
         
