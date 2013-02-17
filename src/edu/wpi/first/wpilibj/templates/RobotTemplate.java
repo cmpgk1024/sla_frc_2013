@@ -88,7 +88,7 @@ public class RobotTemplate extends IterativeRobot {
         //drivetrain.setSafetyEnabled(true);
         //drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
         //compressorA.start();
-        //printMsg("Compressor started.");
+        printMsg("Teleop started.");
     }
     
     /**
