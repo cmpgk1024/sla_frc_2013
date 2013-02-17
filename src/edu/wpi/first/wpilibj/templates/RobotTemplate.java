@@ -144,7 +144,10 @@ public class RobotTemplate extends IterativeRobot {
         	//victor.set(0); //stop motor
         }*/
         //getWatchdog().setEnabled(true);
-        drivetrain.tankDrive(rightStick.getY(), leftStick.getY());
+    	while(isEnabled() && isOperatorControl()) {
+    		drivetrain.tankDrive(leftStick, rightStick);
+    	}
+        
         
         
         //Pneumatics test code
