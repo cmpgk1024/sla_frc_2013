@@ -103,8 +103,9 @@ public class RobotTemplate extends IterativeRobot {
         
         else {
             Timer.delay(15000);
-            teleopInit();
         }
+        
+        teleopInit();
         
         /*drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
         Timer.delay(1000);
