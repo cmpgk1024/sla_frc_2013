@@ -92,6 +92,7 @@ public class RobotTemplate extends IterativeRobot {
         if (voltage < 1) {
             drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
             Timer.delay(1000);
+            drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
         if (voltage < 7 && voltage > 5) {
