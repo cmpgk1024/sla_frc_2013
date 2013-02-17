@@ -9,6 +9,7 @@ package edu.wpi.first.wpilibj.templates;
 
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
@@ -40,6 +41,8 @@ public class RobotTemplate extends IterativeRobot {
     Timer timer;
     DigitalInput switchA;
     Jaguar launcher;
+    double voltage;
+    //DriverStation driverStation = new DriverStation();
     
     /**
      * This function is run when the robot is first started up and should be
@@ -47,6 +50,8 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void robotInit() {
         //Instantialize objects for RobotTemplate
+        
+        //driverStation = new DriverStation();
         rightStick = new Joystick(1);
         leftStick  = new Joystick(2);
         userMessages = DriverStationLCD.getInstance();
@@ -55,6 +60,8 @@ public class RobotTemplate extends IterativeRobot {
         //spikeA = new Relay(1);
         drivetrain = new RobotDrive(1,2);
         launcher = new Jaguar(5);
+        
+        voltage = DriverStation.getInstance().getBatteryVoltage();
         /*pistonUp = new Solenoid(1);
         pistonDown = new Solenoid(2);
         sol3 = new Solenoid(3);
@@ -75,13 +82,32 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousInit() {
-        drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
+        
+        if (voltage > 11) {
+            drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
+            Timer.delay(1000);
+            drivetrain.setLeftRightMotorOutputs(0, 0);
+        }
+        
+        if (voltage < 1) {
+            drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
+            Timer.delay(1000);
+        }
+        
+        if (voltage < 7 && voltage > 5) {
+            drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
+            Timer.delay(1000);
+            drivetrain.setLeftRightMotorOutputs(0, 0);
+        }
+        
+        /*drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
         Timer.delay(1000);
         drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
         Timer.delay(500);
         drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
         Timer.delay(1000);
         drivetrain.setLeftRightMotorOutputs(0, 0);
+        */
     }
 
     public void telopInit() {
