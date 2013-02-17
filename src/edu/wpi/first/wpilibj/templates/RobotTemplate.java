@@ -39,7 +39,7 @@ public class RobotTemplate extends IterativeRobot {
     DriverStationLCD userMessages;
     String controlScheme = "twostick";
     Timer timer;
-    DigitalInput switchA;
+    DigitalInput switchA, switchB;
     Jaguar launcher;
     double voltage;
     //DriverStation driverStation = new DriverStation();
@@ -73,7 +73,8 @@ public class RobotTemplate extends IterativeRobot {
         //drivetrain.tankDrive(leftStick, rightStick);
         /*pistonDown.set(true);
         pistonUp.set(true);*/
-        switchA = new DigitalInput(2);//remember to check port
+        switchA = new DigitalInput(1);
+        switchB = new DigitalInput(2);//remember to check port
     }
 
     /**
@@ -83,14 +84,26 @@ public class RobotTemplate extends IterativeRobot {
         
         voltage = DriverStation.getInstance().getBatteryVoltage();
         
-        if (switchA.get()) {
+        if (switchA.get() && switchB.get()) {
             drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
-        else if (!switchA.get()) {
+        else if (!switchA.get() && !switchB.get()) {
             drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
+            Timer.delay(1000);
+            drivetrain.setLeftRightMotorOutputs(0, 0);
+        }
+        
+        else if (switchA.get() && !switchB.get()) {
+            drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
+            Timer.delay(1000);
+            drivetrain.setLeftRightMotorOutputs(0, 0);
+        }
+        
+        else if (!switchA.get() && switchB.get()) {
+            drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
