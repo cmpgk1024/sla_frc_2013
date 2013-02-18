@@ -85,35 +85,35 @@ public class RobotTemplate extends IterativeRobot {
         voltage = DriverStation.getInstance().getBatteryVoltage();
         
         if (switchA.get() && switchB.get()) {
-            PrintMsg("Moving Forward");
+            printMsg("Moving Forward");
             drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
         else if (!switchA.get() && !switchB.get()) {
-            PrintMsg("Moving backward");
+            printMsg("Moving backward");
             drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
         else if (switchA.get() && !switchB.get()) {
-        	PrintMsg("turning");
+        	printMsg("turning");
             drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
         else if (!switchA.get() && switchB.get()) {
-        	PrintMsg("turning");
+        	printMsg("turning");
             drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
             Timer.delay(1000);
             drivetrain.setLeftRightMotorOutputs(0, 0);
         }
         
         else {
-        	PrintMsg("Switch not detected");
+        	printMsg("Switch not detected");
             Timer.delay(15000);
         }
         
