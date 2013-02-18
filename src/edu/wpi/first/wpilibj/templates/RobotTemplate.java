@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class RobotTemplate extends IterativeRobot {
     public void printMsg(String message) {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
+        userMessages.updateLCD();
     }
     RobotDrive drivetrain;
     //Relay spikeA;
@@ -89,28 +90,28 @@ public class RobotTemplate extends IterativeRobot {
             printMsg("Moving Forward");
             drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
             Timer.delay(1000);
-            drivetrain.setLeftRightMotorOutputs(0, 0);
+            drivetrain.stopMotor();
         }
         
         else if (!switchA.get() && !switchB.get()) {
             printMsg("Moving backward");
             drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
             Timer.delay(1000);
-            drivetrain.setLeftRightMotorOutputs(0, 0);
+            drivetrain.stopMotor();
         }
         
         else if (switchA.get() && !switchB.get()) {
         	printMsg("turning");
             drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
             Timer.delay(1000);
-            drivetrain.setLeftRightMotorOutputs(0, 0);
+            drivetrain.stopMotor();
         }
         
         else if (!switchA.get() && switchB.get()) {
         	printMsg("turning");
             drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
             Timer.delay(1000);
-            drivetrain.setLeftRightMotorOutputs(0, 0);
+            drivetrain.stopMotor();
         }
         
         else {
