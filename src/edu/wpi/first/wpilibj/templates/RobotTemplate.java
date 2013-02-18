@@ -89,34 +89,34 @@ public class RobotTemplate extends IterativeRobot {
         if (switchA.get() && switchB.get()) {
             printMsg("Moving Forward");
             drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
-            Timer.delay(1000);
+            Timer.delay(1);
             drivetrain.stopMotor();
         }
         
         else if (!switchA.get() && !switchB.get()) {
             printMsg("Moving backward");
             drivetrain.setLeftRightMotorOutputs(-1.0, -1.0);
-            Timer.delay(1000);
+            Timer.delay(1);
             drivetrain.stopMotor();
         }
         
         else if (switchA.get() && !switchB.get()) {
         	printMsg("turning");
             drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
-            Timer.delay(1000);
+            Timer.delay(1);
             drivetrain.stopMotor();
         }
         
         else if (!switchA.get() && switchB.get()) {
         	printMsg("turning");
             drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
-            Timer.delay(1000);
+            Timer.delay(1);
             drivetrain.stopMotor();
         }
         
         else {
         	printMsg("Switch not detected");
-            Timer.delay(15000);
+            Timer.delay(15);
         }
         
         teleopInit();
