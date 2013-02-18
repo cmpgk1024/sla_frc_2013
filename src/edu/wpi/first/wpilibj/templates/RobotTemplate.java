@@ -116,10 +116,10 @@ public class RobotTemplate extends IterativeRobot {
         
         else {
         	printMsg("Switch not detected");
-            Timer.delay(15);
+            //Timer.delay(15); not necessary, see below
         }
         
-        teleopInit();
+        //teleopInit(); driver station will do this automatically
         
         /*drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
         Timer.delay(1000);
