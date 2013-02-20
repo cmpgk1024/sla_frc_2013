@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
+import java.io.* ;
+import java.lang.StringBuffer;
 
 
 /**
@@ -115,7 +117,7 @@ public class RobotTemplate extends IterativeRobot {
         }
         
         else {
-        	printMsg("Switch not detected");
+            printMsg("Switch not detected");
             //Timer.delay(15); not necessary, see below
         }
         
@@ -136,7 +138,7 @@ public class RobotTemplate extends IterativeRobot {
         //drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
         //compressorA.start();
         printMsg("Teleop started.");
-    }
+}
     
     /**
      * This function is called periodically during operator control
@@ -151,6 +153,16 @@ public class RobotTemplate extends IterativeRobot {
         	//victor.set(0); //stop motor
         }*/
         //getWatchdog().setEnabled(true);
+        
+        double rightMag; 
+        rightMag = rightStick.getMagnitude();
+        String rightMag2 = String.valueOf(rightMag);
+        double leftMag;
+        leftMag = leftStick.getMagnitude();
+        String leftMag2 = String.valueOf(leftMag);
+        String someMags = new StringBuffer().append(rightMag2).append(" ").append(leftMag2).toString();
+        printMsg(someMags);
+        
     	while(isEnabled() && isOperatorControl()) {
     		drivetrain.tankDrive(leftStick, rightStick);
     	}
