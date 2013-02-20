@@ -154,15 +154,33 @@ public class RobotTemplate extends IterativeRobot {
         }*/
         //getWatchdog().setEnabled(true);
         
-        double rightMag; 
-        rightMag = rightStick.getX();
-        String rightMag2 = String.valueOf(rightMag);
-        double leftMag;
-        leftMag = leftStick.getX();
-        String leftMag2 = String.valueOf(leftMag);
-        String someMags = new StringBuffer().append(rightMag2).append(" ").append(leftMag2).toString();
-        printMsg(someMags);
+        double rightX; 
+        rightX = rightStick.getX();
+        String rightX2 = String.valueOf(rightX);
+        double leftX;
+        leftX = leftStick.getX();
+        String leftX2 = String.valueOf(leftX);
+        String someXs = new StringBuffer().append(rightX2).append(" ").append(leftX2).toString();
+        printMsg(someXs);
         
+        double rightY; 
+        rightY = rightStick.getY();
+        String rightY2 = String.valueOf(rightY);
+        double leftY;
+        leftY = leftStick.getY();
+        String leftY2 = String.valueOf(leftY);
+        String someYs = new StringBuffer().append(rightY2).append(" ").append(leftY2).toString();
+        printMsg(someYs);
+        
+        double rightZ; 
+        rightZ = rightStick.getZ();
+        String rightZ2 = String.valueOf(rightZ);
+        double leftZ;
+        leftZ = leftStick.getZ();
+        String leftZ2 = String.valueOf(leftZ);
+        String someZs = new StringBuffer().append(rightZ2).append(" ").append(leftZ2).toString();
+        printMsg(someZs);
+        ;
     	while(isEnabled() && isOperatorControl()) {
     		drivetrain.tankDrive(leftStick, rightStick);
     	}
