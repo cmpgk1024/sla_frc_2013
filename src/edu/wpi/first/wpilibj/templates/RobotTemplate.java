@@ -155,10 +155,10 @@ public class RobotTemplate extends IterativeRobot {
         //getWatchdog().setEnabled(true);
         
         double rightMag; 
-        rightMag = rightStick.getMagnitude();
+        rightMag = rightStick.getX();
         String rightMag2 = String.valueOf(rightMag);
         double leftMag;
-        leftMag = leftStick.getMagnitude();
+        leftMag = leftStick.getX();
         String leftMag2 = String.valueOf(leftMag);
         String someMags = new StringBuffer().append(rightMag2).append(" ").append(leftMag2).toString();
         printMsg(someMags);
