@@ -89,6 +89,7 @@ public class RobotTemplate extends IterativeRobot {
         drivetrain.setSafetyEnabled(false);
         
         //need to change to autonomous
+        //forward,90r,forward,45l,forward,stop
         
         if (switchA.get() && switchB.get()) {
             printMsg("Moving Forward");
