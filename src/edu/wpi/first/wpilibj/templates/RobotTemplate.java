@@ -88,8 +88,6 @@ public class RobotTemplate extends IterativeRobot {
         voltage = DriverStation.getInstance().getBatteryVoltage();
         drivetrain.setSafetyEnabled(false);
         
-        //need to change to autonomous
-        
         if (switchA.get() && switchB.get()) {
             printMsg("Moving Forward");
             drivetrain.setLeftRightMotorOutputs(0.5, 0.5);
