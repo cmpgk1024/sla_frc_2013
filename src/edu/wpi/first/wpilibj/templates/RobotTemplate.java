@@ -179,9 +179,7 @@ public class RobotTemplate extends IterativeRobot {
         leftZ = leftStick.getZ();
         String leftZ2 = String.valueOf(leftZ);
         String someZs = new StringBuffer().append(rightZ2).append(" ").append(leftZ2).toString();
-        
-        String XYZvalues = new StringBuffer().append(someXs).append(" ").append(someYs).append(" ").append(someZs).toString();
-        printMsg(XYZvalues);
+        printMsg(someZs);
         ;
     	while(isEnabled() && isOperatorControl()) {
     		drivetrain.tankDrive(leftStick, rightStick);
