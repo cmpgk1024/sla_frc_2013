@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
-import java.io.*;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,17 +27,6 @@ import java.io.*;
  * directory.
  */
 public class RobotTemplate extends IterativeRobot {
-	boolean RecordInstructions(Joystck left, Joystick right){
-		double leftX, leftY, leftZ, rightX, rightY, rightZ;
-		while(left.getRawButton(3)){
-			leftX = left.getX();
-			leftY = left.getY();
-			leftZ = left.getZ();
-			rightX = right.getX();
-			rightY = right.getY();
-			rightZ = right.getZ();
-		}
-	}
     public void printMsg(String message) {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
         userMessages.updateLCD();
