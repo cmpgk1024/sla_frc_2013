@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
 import java.io.*;
-import org.apache.commons.lang.time.StopWatch;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,11 +28,8 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class RobotTemplate extends IterativeRobot {
 	boolean RecordInstructions(Joystck left, Joystick right){
-		StopWatch stopwatch = new StopWatch();
-		string elapsedTime;
 		double leftX, leftY, leftZ, rightX, rightY, rightZ;
 		while(left.getRawButton(3)){
-			stopwatch.start();
 			leftX = left.getX();
 			leftY = left.getY();
 			leftZ = left.getZ();
@@ -41,8 +37,6 @@ public class RobotTemplate extends IterativeRobot {
 			rightY = right.getY();
 			rightZ = right.getZ();
 		}
-		stopwatch.stop();
-		elapsedTime = stopwatch;
 	}
     public void printMsg(String message) {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
