@@ -88,8 +88,12 @@ public class RobotTemplate extends IterativeRobot {
         
         if (switchA.get() && switchB.get()) {
             printMsg("Moving Forward");
-            drivetrain.setLeftRightMotorOutputs(0.5, 0.5);
-            Timer.delay(1);
+            drivetrain.setLeftRightMotorOutputs(0.75, 0.75);
+            Timer.delay(10);
+            drivetrain.setLeftRightMotorOutputs(0.75, 0.25); // turn right to go towards goal
+            Timer.delay(5);
+            drivetrain.setLeftRightMotorOutputs(0.25, 0.75); // turn left again to go towards goal
+            Timer.delay(5);
             drivetrain.stopMotor();
         }
         
