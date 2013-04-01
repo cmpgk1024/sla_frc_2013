@@ -31,6 +31,14 @@ public class RobotTemplate extends IterativeRobot {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
         userMessages.updateLCD();
     }
+    double deadband(){
+       	double x = 0;
+    	if (x < 0.5){
+    		x=0;
+    	}
+
+    	return x;
+    }
     RobotDrive drivetrain;
     //Relay spikeA;
     Joystick leftStick;
@@ -150,6 +158,7 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	//x is a placeholder variable
     	/*if(switchA.get()){//if switch isn't tripped
         	printMsg("Moving motor.");
         	//victor.set(0.5); //start motor
