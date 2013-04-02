@@ -31,13 +31,14 @@ public class RobotTemplate extends IterativeRobot {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
         userMessages.updateLCD();
     }
-    double deadband(){
-       	double x = 0;
-    	if (x < 0.5){
-    		x=0;
+    Boolean deadband(double[4] values){
+    	double out = value;
+    	for(int i = 0; i < 6; i++){
+	    	if (values[i] < 0.5 && values[i] > -0.5){
+	    		return true;
+	    	}
     	}
-
-    	return x;
+    	return false;
     }
     RobotDrive drivetrain;
     //Relay spikeA;
@@ -175,10 +176,12 @@ public class RobotTemplate extends IterativeRobot {
         	//victor.set(0); //stop motor
         }*/
         //getWatchdog().setEnabled(true);
-    	while(isEnabled() && isOperatorControl()) {
-    		drivetrain.tankDrive(leftStick, rightStick);
+    	
+    	drivetrain.tankDrive(leftStick, rightStick);
+    	double[4] values = {leftStick.getX, leftStick.getY, rightStick.getX, rightStick.getY};
+    	if(deadband(values)){
+    		drivetrain.stopMotor();
     	}
-        
         
         
         if (leftStick.getTrigger()) {
