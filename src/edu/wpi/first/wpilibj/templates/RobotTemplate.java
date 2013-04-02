@@ -50,6 +50,9 @@ public class RobotTemplate extends IterativeRobot {
     Timer timer;
     DigitalInput switchA, switchB;
     Jaguar launcher;
+    Jaguar launcher2;
+    Jaguar launcher3;
+    //maybe more?
     double voltage;
     //DriverStation driverStation = new DriverStation();
     
@@ -69,6 +72,10 @@ public class RobotTemplate extends IterativeRobot {
         //spikeA = new Relay(1);
         drivetrain = new RobotDrive(1,2);
         launcher = new Jaguar(5);
+        //***CHANGE THESE PLACEHOLDER QUESTIONMARKS***
+        //once jaguars are installed
+        //launcher2 = new Jaguar(?);
+        //launcher3 = new Jaguar(?);
         /*pistonUp = new Solenoid(1);
         pistonDown = new Solenoid(2);
         sol3 = new Solenoid(3);
@@ -177,18 +184,26 @@ public class RobotTemplate extends IterativeRobot {
         if (leftStick.getTrigger()) {
         	if(launcher.get() != -1){
         		launcher.set(-1);
+        		launcher2.set(-1);
+        		launcher3.set(-1);
         	}
             else {
             	launcher.set(0);
+            	launcher2.set(0);
+        		launcher3.set(0);
             }
         } 
         
         if (rightStick.getTrigger()) {
         	if(launcher.get() != 1){
         		launcher.set(1);
+        		launcher2.set(1);
+        		launcher3.set(1);
         	}
             else {
             	launcher.set(0);
+            	launcher2.set(0);
+        		launcher3.set(0);
             }
         }
     
