@@ -33,7 +33,7 @@ public class RobotTemplate extends IterativeRobot {
         userMessages.updateLCD();
     }
     boolean deadband(double[] values){
-    	for(int i = 0; i < 6; i++){
+    	for(int i = 0; i < 2; i++){
 	    	if (values[i] < 0.5 && values[i] > -0.5){
 	    		return true;
 	    	}
@@ -146,12 +146,25 @@ public class RobotTemplate extends IterativeRobot {
         }*/
         //getWatchdog().setEnabled(true);
     	
-    	drivetrain.tankDrive(leftStick, rightStick);
-    	double[] values = {leftStick.getX(), leftStick.getY(), rightStick.getX(), rightStick.getY()};
+    	double[] values = {leftStick.getY(), rightStick.getY()};
     	if(deadband(values)){
     		drivetrain.stopMotor();
     	}
-        
+    	double leftValue;
+    	double rightValue;
+    	if(leftStick.getY() > 0){
+    		leftValue -= 0.5;
+    	}
+    	else{
+    		leftValue += 0.5;
+    	}
+    	if(rightStick.getY() > 0){
+    		rightValue -= 0.5;
+    	}
+    	else{
+    		rightValue += 0.5;
+    	}
+    	drivetrain.tankDrive(leftValue, rightValue);
         
         if (leftStick.getTrigger()) {
         	if(launcher.get() != -1){
