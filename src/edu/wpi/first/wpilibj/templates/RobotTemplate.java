@@ -31,8 +31,7 @@ public class RobotTemplate extends IterativeRobot {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
         userMessages.updateLCD();
     }
-    Boolean deadband(double[4] values){
-    	double out = value;
+    boolean deadband(double[] values){
     	for(int i = 0; i < 6; i++){
 	    	if (values[i] < 0.5 && values[i] > -0.5){
 	    		return true;
@@ -178,7 +177,7 @@ public class RobotTemplate extends IterativeRobot {
         //getWatchdog().setEnabled(true);
     	
     	drivetrain.tankDrive(leftStick, rightStick);
-    	double[4] values = {leftStick.getX, leftStick.getY, rightStick.getX, rightStick.getY};
+    	double[] values = {leftStick.getX(), leftStick.getY(), rightStick.getX(), rightStick.getY()};
     	if(deadband(values)){
     		drivetrain.stopMotor();
     	}
