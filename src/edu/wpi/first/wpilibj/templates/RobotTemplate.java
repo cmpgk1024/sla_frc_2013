@@ -174,23 +174,26 @@ public class RobotTemplate extends IterativeRobot {
         
         
         
-        //Pneumatics test code
         if (leftStick.getTrigger()) {
-        	launcher.set(-1);
+        	if(launcher.get() != -1){
+        		launcher.set(-1);
+        	}
+            else {
+            	launcher.set(0);
+            }
         } 
-        else {
-        	//don't set to 0 to avoid conflicts with right stick
-        }
         
         if (rightStick.getTrigger()) {
-        	launcher.set(1);
+        	if(launcher.get() != 1){
+        		launcher.set(1);
+        	}
+            else {
+            	launcher.set(0);
+            }
         }
-        else {
-        	launcher.set(0);
-        }
+    
         
-        
-        //Switch between "onestick" and "twostick" control schemes
+      /*  //Switch between "onestick" and "twostick" control schemes
         if (leftStick.getRawButton(6)) {
             controlScheme = "twostick";
         }
@@ -205,16 +208,16 @@ public class RobotTemplate extends IterativeRobot {
         else if (controlScheme.equals("onestick")) {
             drivetrain.arcadeDrive(leftStick);
             printMsg("Arcade drive activated.");
-        }
+        }*/
         
-        if(switchA.get()){//if switch isn't tripped
+        /*if(switchA.get()){//if switch isn't tripped
         	printMsg("Moving motor.");
         	//victor.set(0.5); //start motor
         }
         else{
         	printMsg("Motor stopped");
         	//victor.set(0); //stop motor
-        }
+        }*/
         //Rotate in-place left and right, respectively
         if (leftStick.getRawButton(8)) {
             drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
@@ -224,7 +227,7 @@ public class RobotTemplate extends IterativeRobot {
             drivetrain.setLeftRightMotorOutputs(1.0, -1.0);
             printMsg("Rotating clockwise in place.");
         }
-
+        
         //userMessages.println(DriverStationLCD.Line.kMain6, 1, "This is a test" );
         userMessages.updateLCD();
     }
