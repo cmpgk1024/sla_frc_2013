@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.Timer;
  * directory.
  */
 public class RobotTemplate extends IterativeRobot {
+	int autonomousState = 0;
     public void printMsg(String message) {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
         userMessages.updateLCD();
@@ -98,62 +99,31 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void autonomousInit() {
         
-        voltage = DriverStation.getInstance().getBatteryVoltage();
-        drivetrain.setSafetyEnabled(false);
-        
-        if (switchA.get() && switchB.get()) {
-            printMsg("Moving Forward");
-            drivetrain.setLeftRightMotorOutputs(0.75, 0.75);
-            Timer.delay(10);
-            drivetrain.setLeftRightMotorOutputs(0.75, 0.25); // turn right to go towards goal
-            Timer.delay(5);
-            drivetrain.setLeftRightMotorOutputs(0.25, 0.75); // turn left again to go towards goal
-            Timer.delay(5);
-            drivetrain.stopMotor();
-        }
-        
-        else if (!switchA.get() && !switchB.get()) {
-            printMsg("Moving backward");
-            drivetrain.setLeftRightMotorOutputs(-0.5, -0.5);
-            Timer.delay(1);
-            drivetrain.stopMotor();
-        }
-        
-        else if (switchA.get() && !switchB.get()) {
-        	printMsg("turning");
-        	drivetrain.setLeftRightMotorOutputs(0.75, 0.75);
-            Timer.delay(10);
-            drivetrain.setLeftRightMotorOutputs(0.25, 0.75); // turn right to go towards goal
-            Timer.delay(5);
-            drivetrain.setLeftRightMotorOutputs(0.75, 0.25); // turn left again to go towards goal
-            Timer.delay(5);
-            drivetrain.stopMotor();
-        }
-        
-        else if (!switchA.get() && switchB.get()) {
-        	printMsg("turning");
-            drivetrain.setLeftRightMotorOutputs(-0.5, 0.5);
-            Timer.delay(1);
-            drivetrain.stopMotor();
-        }
-        
-        else {
-        	printMsg("Switch not detected");
-            //Timer.delay(15); not necessary, see below
-        }
-        
-        //teleopInit(); driver station will do this automatically
-        
-        /*drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
-        Timer.delay(1000);
-        drivetrain.setLeftRightMotorOutputs(-1.0, 1.0);
-        Timer.delay(500);
-        drivetrain.setLeftRightMotorOutputs(1.0, 1.0);
-        Timer.delay(1000);
-        drivetrain.setLeftRightMotorOutputs(0, 0);
-        */
+    	autonTimer.reset();
+        autonTimer.start();
+       
+        autonomousState = 0;
+       
     }
-
+    Timer autonTimer = new Timer();
+    public void autonomousPeriodic()
+    {
+       switch ( autonomousState )
+       {
+           case 0:
+               drivetrain.drive(.30, 0);
+               if ( autonTimer.get() > 7 ){
+                   autonomousState++;
+               }
+               break;
+           case 1:
+               drivetrain.drive(0, 0);
+               launcher.set(1.0);
+               break;
+               
+               
+       }
+    }
     public void telopInit() {
         //drivetrain.setSafetyEnabled(true);
         //drivetrain.tankDrive(leftStick.getY(), rightStick.getY());
