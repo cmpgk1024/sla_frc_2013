@@ -150,9 +150,9 @@ public class RobotTemplate extends IterativeRobot {
     	if(deadband(values)){
     		drivetrain.stopMotor();
     	}
-    	double leftValue;
-    	double rightValue;
-    	if(leftStick.getY() > 0){
+    	//double leftValue = leftStick.getY();
+    	//double rightValue = rightStick.getY();
+    	/*if(leftStick.getY() > 0){
     		leftValue -= 0.5;
     	}
     	else{
@@ -163,32 +163,32 @@ public class RobotTemplate extends IterativeRobot {
     	}
     	else{
     		rightValue += 0.5;
-    	}
-    	drivetrain.tankDrive(leftValue, rightValue);
+    	}*/
+    	drivetrain.tankDrive(leftStick, rightStick);
         
         if (leftStick.getTrigger()) {
         	if(launcher.get() != -1){
         		launcher.set(-1);
-        		launcher2.set(-1);
-        		launcher3.set(-1);
+        		//launcher2.set(-1);
+        		//launcher3.set(-1);
         	}
             else {
             	launcher.set(0);
-            	launcher2.set(0);
-        		launcher3.set(0);
+            	//launcher2.set(0);
+        	//	launcher3.set(0);
             }
         } 
         
         if (rightStick.getTrigger()) {
         	if(launcher.get() != 1){
         		launcher.set(1);
-        		launcher2.set(1);
-        		launcher3.set(1);
+        	//	launcher2.set(1);
+        	//	launcher3.set(1);
         	}
             else {
             	launcher.set(0);
-            	launcher2.set(0);
-        		launcher3.set(0);
+        //    	launcher2.set(0);
+        //		launcher3.set(0);
             }
         }
     
