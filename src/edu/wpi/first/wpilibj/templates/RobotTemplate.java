@@ -27,6 +27,9 @@ import edu.wpi.first.wpilibj.Timer;
  * directory.
  */
 public class RobotTemplate extends IterativeRobot {
+	int fullspeed = 1;
+	int halfspeed = 0.5;
+	int stopped = 0;
 	int autonomousState = 0;
     public void printMsg(String message) {
         userMessages.println(DriverStationLCD.Line.kMain6, 1, message );
@@ -177,7 +180,25 @@ public class RobotTemplate extends IterativeRobot {
             	//launcher2.set(0);
         	//	launcher3.set(0);
             }
-        } 
+        }
+		if (leftStick.getRawButton(6)){
+			launcher.set(fullspeed * -1);
+		}
+		else if(leftStick.getRawButton(7)){
+			launcher.set(halfspeed * -1);
+		}
+		else {
+			//launcher.set(0); not needed because above - should rewrite this logic eventually
+		}
+		if (leftStick.getRawButton(10)){
+			launcher.set(fullspeed);
+		}
+		else if(leftStick.getRawButton(11)){
+			launcher.set(halfspeed);
+		}
+		else {
+			//launcher.set(0);
+		}
         
         if (rightStick.getTrigger()) {
         	if(launcher.get() != 1){
@@ -186,7 +207,7 @@ public class RobotTemplate extends IterativeRobot {
         	//	launcher3.set(1);
         	}
             else {
-            	launcher.set(0);
+            //	launcher.set(0);
         //    	launcher2.set(0);
         //		launcher3.set(0);
             }
