@@ -1,4 +1,4 @@
-/build/
-/nbproject/private/
-/j2meclasses/
-/suite/
+build/*
+nbproject/private/*
+j2meclasses/*
+suite/*
